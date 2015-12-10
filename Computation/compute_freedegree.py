@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 import argparse, math
-"""
-利用候选词序列词频文件，并计算每个候选词的右(左)邻字熵
-由于此脚本只负责算词的邻熵，freq_file可以只包含两字及以上的词
-"""
+
 parser = argparse.ArgumentParser()
 parser.add_argument("freq_file", help="candidate words file")
 parser.add_argument("-s", "--separator", help="field separator", default="\t")
