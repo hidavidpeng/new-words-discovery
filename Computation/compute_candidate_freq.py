@@ -2,10 +2,13 @@
 import argparse, re
 from collections import Counter
 import logging
+from logging import NullHandler
 
 class CandidateFreq:
     def __init__(self):
-        self.logger = logging.getLogger('Init')
+        logging.basicConfig()
+        self.logger = logging.getLogger('CandidateFreq')
+        self.logger.setLevel(logging.INFO)
     
     ''' Compute frequency of candidate words.
         @param: src_file: path to the file
@@ -29,12 +32,12 @@ class CandidateFreq:
                 freq_update(sentence[i:i+4] for i in xrange(sen_len-4, -1, -1))
                 freq_update(sentence[i:i+5] for i in xrange(sen_len-5, -1, -1))
 
-        self.result_dict = {}
+        result_dict = {}
         for key, value in freq.iteritems():
-            self.result_dict.update({key: value})
+            result_dict.update({key: value})
             
-        self.logger.info('Result candidate frequency: ' + str(self.result_dict))
-        return self.result_dict
+        self.logger.info('Result candidate frequency: ' + str(result_dict))
+        return result_dict
 
 
     ''' Filter frequency of candidate words.
@@ -43,15 +46,15 @@ class CandidateFreq:
         @param: maxLen: max word length, default=4 
         @return: Dictionary with key of words and value of frequency
     '''
-    def filter(self, freq_limit, minLen=2, maxLen=4):
-        if not self.result_dict:
+    def filter(self, result_dict, freq_limit, minLen=2, maxLen=4):
+        if not result_dict:
             self.logger.error('No result dictionary initialized')
             return
         
         tmp_dict = {}
-        for key, value in self.result_dict.iteritems():
+        for key, value in result_dict.iteritems():
             if len(key)>=minLen and len(key)<=maxLen and value>=freq_limit:
                 tmp_dict.update({key: value})
-        self.result_dict = tmp_dict
-        self.logger.info('Filtered candidates: ' + str(self.result_dict))
-        return self.result_dict
+        result_dict = tmp_dict
+        self.logger.info('Filtered candidates: ' + str(result_dict))
+        return result_dict

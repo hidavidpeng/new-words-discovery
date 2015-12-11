@@ -2,10 +2,13 @@
 from __future__ import division
 import argparse, math
 import logging
+from logging import NullHandler
 
 class Solidation:
     def __init__(self):
-        self.logger = logging.getLogger('Init')
+        logging.basicConfig()
+        self.logger = logging.getLogger('Solidation')
+        self.logger.setLevel(logging.INFO)
         
     '''Solication of candidate words
         @param: freq: candidate freq list
