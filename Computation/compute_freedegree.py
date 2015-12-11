@@ -31,8 +31,10 @@ class Entropy:
         if not reverse:
             for (word, entropy) in zip(words, entropys):
                 result_entro.update({word: entropy})
+            print result_entro
             return result_entro
         elif reverse:
             for (word, entropy) in zip(words, entropys):
                 result_entro.update({word[::-1]: entropy})
+            print result_entro
             return result_entro
