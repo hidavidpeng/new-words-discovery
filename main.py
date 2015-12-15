@@ -33,7 +33,7 @@ def discover(path):
     elements = FilterCandidate().filter_all(elements)
     
     file_name = basename(path)
-    with open('//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/TestSet/Result/%s' % file_name, 'w') as fd:
+    with open('//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/TestSet/Pig/%s' % file_name, 'w') as fd:
         for element in elements:
             try:
                 fd.writelines('%s\t%d\t%.9f\t%.9f\t%.9f\n' % (element['word'].encode('utf-8'), element['freq'], element['solidation'], 
@@ -42,7 +42,7 @@ def discover(path):
                 print 'Drop item: ' + str(element)
 
 if __name__ == '__main__':
-    pathDir = '//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/OtherSet/Other/'
+    pathDir = '//spg-share/root/Users/v-fandli/Data/PigTestSet/v1.0/'
     fileList = [f for f in listdir(pathDir) if isfile(join(pathDir, f))]
     for file in fileList:
         discover(pathDir + file)
