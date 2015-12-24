@@ -10,12 +10,13 @@ class Solidation:
         self.logger = logging.getLogger('Solidation')
         self.logger.setLevel(logging.INFO)
         
-    '''Solication of candidate words
+    
+    def compute(self, freq, freq_limit=1):
+        '''Solidation of candidate words
         @param: freq: candidate freq list
         @param: freq_limit: min freq to be selected, default = 1 
         @return: result list of solidation
-    '''
-    def compute(self, freq, freq_limit=1):
+        '''
         self.result_soli = {}
         
         for word in freq:

@@ -11,8 +11,10 @@ from Computation.compute_candidate_freq import CandidateFreq
 from Computation.compute_solidation import Solidation
 from Computation.compute_freedegree import Entropy
 from Operation.filter import FilterCandidate
+from Operation.PreFilter import prefilter
 
 def discover(path):
+    prefilter().filter(path)
     rFreq = CandidateFreq().compute(path)
     rFreqRev = CandidateFreq().compute(path, reverse=True)
     rFreqFil = CandidateFreq().filter(rFreq, 1)
@@ -33,7 +35,7 @@ def discover(path):
     elements = FilterCandidate().filter_all(elements)
     
     file_name = basename(path)
-    with open('//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/TestSet/Pig/%s' % file_name, 'w') as fd:
+    with open('//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/TestSet/Test20151217/result/%s' % file_name, 'w') as fd:
         for element in elements:
             try:
                 fd.writelines('%s\t%d\t%.9f\t%.9f\t%.9f\n' % (element['word'].encode('utf-8'), element['freq'], element['solidation'], 
@@ -42,7 +44,7 @@ def discover(path):
                 print 'Drop item: ' + str(element)
 
 if __name__ == '__main__':
-    pathDir = '//spg-share/root/Users/v-fandli/Data/PigTestSet/v1.0/'
+    pathDir = '//spg-share/root/Users/v-shayi/Pig_Raising/Dataset/TestSet/Test20151217/'
     fileList = [f for f in listdir(pathDir) if isfile(join(pathDir, f))]
     for file in fileList:
         discover(pathDir + file)

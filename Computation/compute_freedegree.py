@@ -12,12 +12,12 @@ class Entropy:
         else:
             return 0
         
-    ''' Compute entropy of words
+    def compute(self, freq, freq_limit=1, minLen=2, maxLen=4, reverse=False):
+        ''' Compute entropy of words
         @param: freq: input dictionary of freq list
         @param: direction: right/left entropy, default as right
         @return: entropy dictionary
-    '''
-    def compute(self, freq, freq_limit=1, minLen=2, maxLen=4, reverse=False):
+        '''
         words = {word for word, count in freq.iteritems() if 2<=len(word)<=4 and count>=freq_limit}
         right_distribution = {}
         for key, count in freq.iteritems():
