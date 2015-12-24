@@ -15,6 +15,7 @@ from Operation.PreFilter import prefilter
 
 def discover(path):
     prefilter().filter(path)
+    
     rFreq = CandidateFreq().compute(path)
     rFreqRev = CandidateFreq().compute(path, reverse=True)
     rFreqFil = CandidateFreq().filter(rFreq, 1)
@@ -23,7 +24,6 @@ def discover(path):
     
     rEntroRight = Entropy().compute(rFreq)
     rEntroLeft = Entropy().compute(rFreqRev, reverse=True)
-
     
     elements = []
     for k in rFreq:
